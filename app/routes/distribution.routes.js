@@ -3,25 +3,25 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  // Create a new Tutorial
+  // Create a new Distribution
   router.post("/", distribution.create);
 
-  // Retrieve all Tutorials
+  // Retrieve all Distributions
   router.get("/", distribution.findAll);
 
-  // Retrieve all published Tutorials
+  // Retrieve all published Distributions
   router.get("/published", distribution.findAllPublished);
 
-  // Retrieve a single Tutorial with id
+  // Retrieve a single Distribution with id
   router.get("/:id", distribution.findOne);
 
-  // Update a Tutorial with id
+  // Update a Distribution with id
   router.put("/:id", distribution.update);
 
-  // Delete a Tutorial with id
+  // Delete a Distribution with id
   router.delete("/:id", distribution.delete);
 
-  // Delete all Tutorials
+  // Delete all Distributions
   router.delete("/", distribution.deleteAll);
 
   app.use('/api/distribution', router);

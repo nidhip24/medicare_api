@@ -3,25 +3,25 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  // Create a new Tutorial
+  // Create a new Inventory
   router.post("/", inventory.create);
 
-  // Retrieve all Tutorials
+  // Retrieve all Inventory
   router.get("/", inventory.findAll);
 
-  // Retrieve all published Tutorials
+  // Retrieve all published Inventory
   router.get("/published", inventory.findAllPublished);
 
-  // Retrieve a single Tutorial with id
+  // Retrieve a single Inventory with id
   router.get("/:id", inventory.findOne);
 
-  // Update a Tutorial with id
+  // Update a Inventory with id
   router.put("/:id", inventory.update);
 
-  // Delete a Tutorial with id
+  // Delete a Inventory with id
   router.delete("/:id", inventory.delete);
 
-  // Delete all Tutorials
+  // Delete all Inventory
   router.delete("/", inventory.deleteAll);
 
   app.use('/api/inventory', router);
