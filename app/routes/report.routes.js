@@ -8,6 +8,7 @@ module.exports = app => {
 
   // Create a new Report
   router.post("/expiry_report", report.expiry_report);
+  router.post("/expiry_report_email", report.expiry_report_email);
 
   // Retrieve all Reports
   router.get("/", report.findAll);
