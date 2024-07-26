@@ -22,11 +22,9 @@ exports.expiry_report = (req, res) => {
 
   // Create a Report
   const report = new Report({
-    start_date: req.body.start_date,
-    end_date: req.body.end_date,
-    is_email_alert: req.body.is_email_alert,
-    requested_by: req.body.requested_by,
-    email: req.body.email
+    uid: req.body.requested_by,
+    email: req.body.email,
+    report_type: req.body.report_type,
   });
 
   // get data from db
@@ -38,8 +36,16 @@ exports.expiry_report = (req, res) => {
       });
     else {
       var fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
-      var fieldNames = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
-      // var data = json2csv({ data: data, fields: fields, fieldNames: fieldNames });
+      
+      let reportType = req.body.report_type;
+      if (reportType === 'low_stock_report') {
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure'];
+      } else if (reportType === 'distribution_report') {
+        fields = ['date_dispensed', 'generic_name', 'brand_name', 'unit_of_measure', 'quantity_dispensed', 'lot_number', 'expiration_date', 'patient_name', 'patient_birth_date', 'patient_address', 'patient_diagnosis', 'created_at'];
+      } else {
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
+      }
+
       const opts = {
         fields: fields
       };
@@ -62,11 +68,9 @@ exports.expiry_report_email = (req, res) => {
 
   // Create a Report
   const report = new Report({
-    start_date: req.body.start_date,
-    end_date: req.body.end_date,
-    is_email_alert: req.body.is_email_alert,
-    requested_by: req.body.requested_by,
-    email: req.body.email
+    uid: req.body.requested_by,
+    email: req.body.email,
+    report_type: req.body.report_type,
   });
 
   // get data from db

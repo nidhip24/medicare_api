@@ -2,21 +2,41 @@ const sql = require("./db.js");
 
 // constructor
 const Report = function(report) {
-  this.start_date = report.start_date,
-  this.end_date = report.end_date,
-  this.is_email_alert = report.is_email_alert,
-  this.requested_by = report.requested_by,
-  this.email = report.email
+  this.email = report.email,
+  this.type = report.report_type,
+  this.uid = report.uid
 };
 
 const tableName = "medicineinventory";
 
 Report.findByReport = (report, result) => {
-  sql.query(`SELECT *, CASE
-        WHEN expiry_date < CURRENT_DATE THEN 'Expired'
-        WHEN expiry_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '7' DAY THEN 'About to Expire'
-        ELSE 'Valid'
-    END AS status FROM ${tableName} WHERE expiry_date <= CURRENT_DATE + INTERVAL '7' DAY`, (err, res) => {
+
+
+  sql.query("INSERT INTO reports SET ?", report, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      // result(err, null);
+      // return;
+    }
+    console.log("created inv: ", { id: res, ...report });
+  });
+
+  let query = '';
+  if (report.type == 'expiry_report') {
+    query = `SELECT *, CASE
+      WHEN expiry_date < CURRENT_DATE THEN 'Expired'
+      WHEN expiry_date BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '7' DAY THEN 'About to Expire'
+      ELSE 'Valid'
+      END AS status FROM ${tableName} WHERE expiry_date <= CURRENT_DATE + INTERVAL '7' DAY`
+  } else if (report.type == 'low_stock_report') {
+    query = `select * from ${tableName} where quantity < 10;`;
+  } else if (report.type == 'distribution_report') {
+    query = `select * from medicinedispensation;`;
+  }
+
+  console.log(query);
+
+  sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -24,12 +44,12 @@ Report.findByReport = (report, result) => {
     }
 
     if (res.length) {
+      console.log("found inv: ", res);
       result(null, res);
       return;
     }
 
-    // not found Report with the id
-    result({ kind: "not_found" }, null);
+    result(null, res);
   });
 };
 
