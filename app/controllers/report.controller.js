@@ -42,7 +42,10 @@ exports.expiry_report = (req, res) => {
         fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure'];
       } else if (reportType === 'distribution_report') {
         fields = ['date_dispensed', 'generic_name', 'brand_name', 'unit_of_measure', 'quantity_dispensed', 'lot_number', 'expiration_date', 'patient_name', 'patient_birth_date', 'patient_address', 'patient_diagnosis', 'created_at'];
-      } else {
+      } else if (reportType === 'inventory') {
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'created_at'];
+      }
+      else {
         fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
       }
 
@@ -53,6 +56,37 @@ exports.expiry_report = (req, res) => {
       const csv = parser.parse(data);
       res.attachment('filename.csv');
       res.send(csv);
+
+      if (req.body.email) {
+        let html_body = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Medicine Information Table</title><style>table {width: 100%;border-collapse: collapse;}th, td {padding: 8px 12px;border: 1px solid #ddd;text-align: left;}th {background-color: #f4f4f4;}</style></head><body><p>Hey there,</p>`;
+        html_body += `<p>${reportType} Report is ready</p><table><thead><tr>`;
+        fields.forEach((field) => {
+          html_body += `<th>${field}</th>`;
+        });
+
+        data.forEach((item) => {
+          fields.forEach((field) => {
+            html_body += `<td>${item[field]}</td>`;
+          });
+        });
+
+        // Email options
+        let mailOptions = {
+          from: 'nidhipkathiriya@gmail.com', // Sender address
+          to: req.body.email, // List of recipients
+          subject: 'Medicare Report - ' . reportType, // Subject line
+          html: html_body // HTML body
+        };
+
+        // Send email
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              return console.log(`Error: ${error}`);
+          }
+          console.log(`Message Sent: ${info.response}`);
+        });
+
+      }
     }
   });
 };

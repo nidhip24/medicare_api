@@ -32,6 +32,8 @@ Report.findByReport = (report, result) => {
     query = `select * from ${tableName} where quantity < 10;`;
   } else if (report.type == 'distribution_report') {
     query = `select * from medicinedispensation;`;
+  } else if (report.type == 'inventory') {
+    query = `select * from medicineinventory;`;
   }
 
   console.log(query);
