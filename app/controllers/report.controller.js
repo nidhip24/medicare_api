@@ -63,11 +63,14 @@ exports.expiry_report = (req, res) => {
         fields.forEach((field) => {
           html_body += `<th>${field}</th>`;
         });
+        html_body += `</tr>`;
 
         data.forEach((item) => {
+          html_body += `<tr>`;
           fields.forEach((field) => {
             html_body += `<td>${item[field]}</td>`;
           });
+          html_body += `</tr>`;
         });
 
         // Email options
