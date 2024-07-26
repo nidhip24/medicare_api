@@ -78,6 +78,7 @@ exports.expiry_report = (req, res) => {
           from: 'nidhipkathiriya@gmail.com', // Sender address
           to: req.body.email, // List of recipients
           subject: 'Medicare Report - ' . reportType, // Subject line
+          text: 'Email Alerts', // Plain text body
           html: html_body // HTML body
         };
 
