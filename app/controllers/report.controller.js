@@ -6,8 +6,8 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: 'nidhipkathiriya@gmail.com', // Replace with your email
-      pass: 'xxxxxxxx' // Replace with your email password
+      user: process.env.SMTP_FROM_EMAIL, // Replace with your email
+      pass: process.env.SMTP_PASSWORD // Replace with your email password
   }
 });
 
@@ -78,7 +78,7 @@ exports.expiry_report_email = (req, res) => {
       });
     else {
 
-      let html_body = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Medicine Information Table</title><style>table {width: 100%;border-collapse: collapse;}th, td {padding: 8px 12px;border: 1px solid #ddd;text-align: left;}th {background-color: #f4f4f4;}</style></head><body><table><thead><tr><th>Generic Name</th><th>Brand Name</th><th>Expiry Date</th><th>Quantity</th><th>Lot Number</th><th>Unit of Measure</th><th>Status</th></tr></thead><tbody>`;
+      let html_body = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Medicine Information Table</title><style>table {width: 100%;border-collapse: collapse;}th, td {padding: 8px 12px;border: 1px solid #ddd;text-align: left;}th {background-color: #f4f4f4;}</style></head><body><p>Hey there,</p><p>Expiry Report is ready</p><table><thead><tr><th>Generic Name</th><th>Brand Name</th><th>Expiry Date</th><th>Quantity</th><th>Lot Number</th><th>Unit of Measure</th><th>Status</th></tr></thead><tbody>`;
       data.forEach((item) => {
         if (item.status === 'Expired')
           html_body += `<tr><td>${item.generic_name}</td><td>${item.brand_name}</td><td>${item.expiry_date}</td><td>${item.quantity}</td><td>${item.lot_number}</td><td>${item.unit_of_measure}</td><td>${item.status}</td></tr>`;
