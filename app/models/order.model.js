@@ -2,11 +2,12 @@ const sql = require("./db.js");
 
 // constructor
 const MedicineOrder = function(inventory) {
-  this.date_requested= inventory.date_requested,
-  this.mtid= inventory.mtid,
-  this.quantity_requested= inventory.quantity_requested,
-  this.requested_by= inventory.requested_by,
-  this.health_station_name= inventory.health_station_name
+  this.date_requested = inventory.date_requested,
+  this.mtid = inventory.mtid,
+  this.quantity_requested = inventory.quantity_requested,
+  this.requested_by = inventory.requested_by,
+  this.health_station_name = inventory.health_station_name,
+  this.uid = inventory.uid
 };
 
 MedicineOrder.create = (newMedicineOrder, result) => {

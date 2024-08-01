@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     quantity_requested: req.body.quantity_requested,
     requested_by: req.body.requested_by,
     health_station_name: req.body.health_station_name,
+    uid: req.body.uid,
   });
 
   // Save MedicineOrder in the database
