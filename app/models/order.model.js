@@ -42,11 +42,11 @@ MedicineOrder.findById = (id, result) => {
   });
 };
 
-MedicineOrder.getAll = (title, result) => {
+MedicineOrder.getAll = (uid, result) => {
   let query = "SELECT * FROM medicineorder";
 
-  if (title) {
-    query += ` WHERE title LIKE '%${title}%'`;
+  if (uid) {
+    query += ` WHERE uid = ${uid}`;
   }
 
   sql.query(query, (err, res) => {

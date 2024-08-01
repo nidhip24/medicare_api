@@ -32,9 +32,9 @@ exports.create = (req, res) => {
 
 // Retrieve all MedicineOrders from the database (with condition).
 exports.findAll = (req, res) => {
-  const title = req.query.title;
+  const uid = req.query.uid;
 
-  MedicineOrder.getAll(title, (err, data) => {
+  MedicineOrder.getAll(uid, (err, data) => {
     if (err)
       res.status(500).send({
         message:
