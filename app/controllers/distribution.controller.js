@@ -28,6 +28,8 @@ exports.create = (req, res) => {
     end_user: req.body.end_user,
   });
 
+  console.log(distribution);
+
   // Save MedicineDispensation in the database
   MedicineDispensation.create(distribution, (err, data) => {
     if (err)
