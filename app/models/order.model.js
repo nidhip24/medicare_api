@@ -43,7 +43,7 @@ MedicineOrder.findById = (id, result) => {
 };
 
 MedicineOrder.getAll = (uid, result) => {
-  let query = "SELECT * FROM medicineorder";
+  let query = "SELECT *, (select name from medicineusers where id = uid) as added_by FROM medicineorder";
 
   if (uid) {
     query += ` WHERE uid = ${uid}`;
