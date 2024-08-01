@@ -17,6 +17,7 @@ exports.create = (req, res) => {
     quantity: req.body.quantity,
     lot_number: req.body.lot_number,
     unit_of_measure: req.body.unit_of_measure,
+    classification_of_medicine: req.body.classification_of_medicine,
   });
 
   // Save MedicineInventory in the database

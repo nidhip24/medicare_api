@@ -39,13 +39,13 @@ exports.expiry_report = (req, res) => {
       
       let reportType = req.body.report_type;
       if (reportType === 'low_stock_report') {
-        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure'];
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'classification_of_medicine'];
       } else if (reportType === 'distribution_report') {
         fields = ['date_dispensed', 'generic_name', 'brand_name', 'unit_of_measure', 'quantity_dispensed', 'lot_number', 'expiration_date', 'patient_name', 'patient_birth_date', 'patient_address', 'patient_diagnosis', 'created_at'];
       } else if (reportType === 'inventory') {
-        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'created_at'];
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'created_at', 'classification_of_medicine'];
       } else {
-        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
+        fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status', 'classification_of_medicine'];
       }
 
       const opts = {

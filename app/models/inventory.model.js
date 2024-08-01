@@ -8,6 +8,7 @@ const MedicineInventory = function(inventory) {
   this.quantity = inventory.quantity;
   this.lot_number = inventory.lot_number;
   this.unit_of_measure = inventory.unit_of_measure;
+  this.classification_of_medicine = inventory.classification_of_medicine;
 };
 
 MedicineInventory.create = (newMedicineInventory, result) => {
