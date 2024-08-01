@@ -8,7 +8,7 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-  if (req.body.patient_birth_date.hasOwnProperty('toString')) {
+  if (req.body.patient_birth_date.hasOwnProperty('toString') || req.body.patient_birth_date == "") {
     req.body.patient_birth_date = null;
   }
 
