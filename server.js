@@ -26,6 +26,8 @@ require("./app/routes/report.routes.js")(app);
 require("./app/routes/register.routes.js")(app);
 require("./app/routes/roles.routes.js")(app);
 
+require("./app/routes/config.routes.js")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

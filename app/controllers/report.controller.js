@@ -44,8 +44,7 @@ exports.expiry_report = (req, res) => {
         fields = ['date_dispensed', 'generic_name', 'brand_name', 'unit_of_measure', 'quantity_dispensed', 'lot_number', 'expiration_date', 'patient_name', 'patient_birth_date', 'patient_address', 'patient_diagnosis', 'created_at'];
       } else if (reportType === 'inventory') {
         fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'created_at'];
-      }
-      else {
+      } else {
         fields = ['generic_name', 'brand_name', 'expiry_date', 'quantity', 'lot_number', 'unit_of_measure', 'status'];
       }
 

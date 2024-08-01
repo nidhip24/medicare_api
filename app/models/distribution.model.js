@@ -4,16 +4,17 @@ const sql = require("./db.js");
 const MedicineDispensation = function(distribution) {
 
   this.date_dispensed = distribution.date_dispensed,
-    this.generic_name = distribution.generic_name,
-    this.brand_name = distribution.brand_name,
-    this.unit_of_measure = distribution.unit_of_measure,
-    this.quantity_dispensed = distribution.quantity_dispensed,
-    this.lot_number = distribution.lot_number,
-    this.expiration_date = distribution.expiration_date,
-    this.patient_name = distribution.patient_name,
-    this.patient_birth_date = distribution.patient_birth_date,
-    this.patient_address = distribution.patient_address,
-    this.patient_diagnosis = distribution.patient_diagnosis
+  this.generic_name = distribution.generic_name,
+  this.brand_name = distribution.brand_name,
+  this.unit_of_measure = distribution.unit_of_measure,
+  this.quantity_dispensed = distribution.quantity_dispensed,
+  this.lot_number = distribution.lot_number,
+  this.expiration_date = distribution.expiration_date,
+  this.patient_name = distribution.patient_name,
+  this.patient_birth_date = distribution.patient_birth_date,
+  this.patient_address = distribution.patient_address,
+  this.patient_diagnosis = distribution.patient_diagnosis,
+  this.end_user = distribution.end_user
 };
 
 MedicineDispensation.create = (newMedicineDispensation, result) => {

@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     patient_name: req.body.patient_name,
     patient_birth_date: req.body.patient_birth_date,
     patient_address: req.body.patient_address,
-    patient_diagnosis: req.body.patient_diagnosis
+    patient_diagnosis: req.body.patient_diagnosis,
+    end_user: req.body.end_user,
   });
 
   // Save MedicineDispensation in the database
