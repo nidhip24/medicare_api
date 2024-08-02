@@ -91,8 +91,8 @@ MedicineOrder.updateById = (id, status, result) => {
         return;
       }
 
-      console.log("updated inv: ", { id: id, ...inv });
-      result(null, { id: id, ...inv });
+      console.log("updated inv: ", { id: id, status: status });
+      result(null, { id: id, status: status });
     }
   );
 };
