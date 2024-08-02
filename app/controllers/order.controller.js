@@ -86,7 +86,7 @@ exports.update = (req, res) => {
 
   MedicineOrder.updateById(
     req.params.id,
-    new MedicineOrder(req.body),
+    req.body.status,
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {

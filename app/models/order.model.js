@@ -74,10 +74,10 @@ MedicineOrder.getAllPublished = result => {
   });
 };
 
-MedicineOrder.updateById = (id, inv, result) => {
+MedicineOrder.updateById = (id, status, result) => {
   sql.query(
-    "UPDATE medicineorder SET title = ?, description = ?, published = ? WHERE id = ?",
-    [inv.title, inv.description, inv.published, id],
+    "UPDATE medicineorder SET status = ? WHERE id = ?",
+    [status, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
