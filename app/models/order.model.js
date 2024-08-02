@@ -74,9 +74,9 @@ MedicineOrder.getAllPublished = result => {
   });
 };
 
-MedicineOrder.updateById = (id, status, result) => {
+MedicineOrder.updateById = (id, uid, status, result) => {
   sql.query(
-    "UPDATE medicineorder SET status = ? WHERE id = ?",
+    "UPDATE medicineorder SET status = ? WHERE id = ?; ",
     [status, id],
     (err, res) => {
       if (err) {
@@ -89,6 +89,21 @@ MedicineOrder.updateById = (id, status, result) => {
         // not found MedicineOrder with the id
         result({ kind: "not_found" }, null);
         return;
+      }
+
+      if (status == "accepted") {
+        sql.query(
+          "call update_inventory(?, ?)",
+          [uid, id],
+          (err, res) => {
+            if (err) {
+              console.log("error: ", err);
+              result(null, err);
+              return;
+            }
+            
+          }
+        );    
       }
 
       console.log("updated inv: ", { id: id, status: status });

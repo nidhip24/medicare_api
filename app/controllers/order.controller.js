@@ -86,6 +86,7 @@ exports.update = (req, res) => {
 
   MedicineOrder.updateById(
     req.params.id,
+    req.body.uid,
     req.body.status,
     (err, data) => {
       if (err) {
